@@ -1,0 +1,2 @@
+Samples	CH192A
+Polarization	0.00E+00

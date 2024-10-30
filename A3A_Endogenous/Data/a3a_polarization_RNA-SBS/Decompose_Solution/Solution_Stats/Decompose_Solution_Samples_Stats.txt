@@ -1,0 +1,2 @@
+Sample Names	Total Mutations	Cosine Similarity	L1 Norm	L1_Norm_%	L2 Norm	L2_Norm_%	KL Divergence	Correlation
+Polarization	128	0.985	72.823	56.893%	19.951	25.453%	0.4179	0.985

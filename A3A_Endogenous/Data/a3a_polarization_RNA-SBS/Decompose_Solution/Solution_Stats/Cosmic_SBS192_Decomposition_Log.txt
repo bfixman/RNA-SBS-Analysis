@@ -1,0 +1,27 @@
+############################ Signature Decomposition Details ################################
+
+
+Context Type: 192
+Genome Build: GRCh37
+##### Using a custom signature database for decomposition #####The following signatures are excluded: 
+
+
+
+######################## Decomposing SBS192A ########################
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!! LAYER: 0 !!!!!!!!!!!!!!!!!!!!!!!!!
+Best Signature Composition [1]
+L2 Error % 0.16
+Cosine Similarity 0.99
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!! LAYER: 1 !!!!!!!!!!!!!!!!!!!!!!!!!
+Best Signature Composition [1]
+L2 Error % 0.16
+Cosine Similarity 0.99
+
+#################### Final Composition #################################
+[1]
+L2 Error % 0.16
+Cosine Similarity 0.99
