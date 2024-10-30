@@ -1,0 +1,2 @@
+Sample Names	Total Mutations	Cosine Similarity	L1 Norm	L1_Norm_%	L2 Norm	L2_Norm_%	KL Divergence	Correlation
+Apobec1_RBM46	2953	1.0	10.354	0.351%	3.64	0.296%	2e-05	1.0

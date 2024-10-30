@@ -1,0 +1,47 @@
+---
+title: "Variant Processing"
+author: "BF"
+date: "2024-07-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+# Load required library
+library(readxl)
+
+# Specify the path to the Excel file
+file_path <- '/Users/benfixman/Library/Mobile Documents/com~apple~CloudDocs/Chen_Lab/RNA_SBS/A1_RBM46_circSeq/Data/variants/edited-levels-filtered.csv'
+
+# Read in the Excel file
+data <- read.csv(file_path)
+
+# Add "chr" before every value in the chr column
+data$chromosome <- paste0("chr", data$chromosome)
+
+# Fill "RBM46" in every cell in the sample_id column
+data$sample_id <- "Apobec1_RBM46"
+
+data = data[,c(1,2,3,14)]
+
+# Use ifelse to assign muttype based on the value in the strand column
+data$muttype <- ifelse(data$strand == "+", "C>T", 
+                       ifelse(data$strand == "-", "G>A", NA))
+
+data = data[,-3]
+
+# Move the 3rd column to the 1st position
+data <- data[, c(3, 1, 2, 4:ncol(data))]
+
+colnames(data) = c("sample_id", "chr", "pos", "muttype")
+head(data)
+
+write.csv(data, '/Users/benfixman/Library/Mobile Documents/com~apple~CloudDocs/Chen_Lab/RNA_SBS/A1_RBM46_circSeq/Data/variants/filtered_variants.csv', row.names=FALSE)
+```
+
+
