@@ -1,0 +1,2 @@
+Samples	SBS192A
+A3B	2230

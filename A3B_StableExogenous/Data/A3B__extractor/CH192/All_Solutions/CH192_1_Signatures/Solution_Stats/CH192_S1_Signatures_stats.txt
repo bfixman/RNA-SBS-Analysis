@@ -1,0 +1,2 @@
+Signatures	Stability	Total Mutations
+CH192A	1.0	2230

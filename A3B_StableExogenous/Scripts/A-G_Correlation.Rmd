@@ -1,0 +1,97 @@
+---
+title: "A3B_ADAR A>G Correlation"
+author: "BF"
+date: "2024-10-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Import A>G signature coefficients as vectors (from COSMIC RNA SBS1 and A3B) and run cor() to see correlation
+
+A3B
+A[A>G]A	0.01055598
+A[A>G]C	0.00749771
+A[A>G]G	0.08527746
+A[A>G]T	0.02802223
+
+C[A>G]A	0.02193707
+C[A>G]C	0.04895483
+C[A>G]G	0.10791408
+C[A>G]T	0.01182055
+
+G[A>G]A	0.00087892
+G[A>G]C	0.00046638
+G[A>G]G	0.01701334
+G[A>G]T	0.00041706
+
+T[A>G]A	0.02893703
+T[A>G]C	0.05980229
+T[A>G]G	0.14006633
+T[A>G]T	0.02670834
+
+
+
+
+ADAR:
+
+A[A>G]A	0.035655038
+A[A>G]C	0.020430637
+A[A>G]G	0.200239365
+A[A>G]T	0.018176868
+
+C[A>G]A	0.004278463
+C[A>G]C	0.009007546
+C[A>G]G	0.158760057
+C[A>G]T	0.00582586
+
+G[A>G]A	0.003506687
+G[A>G]C	0.000114872
+G[A>G]G	0.008511646
+G[A>G]T	6.53E-05
+
+T[A>G]A	0.046342841
+T[A>G]C	0.06486876
+T[A>G]G	0.227248867
+T[A>G]T	0.064710563
+
+```{r}
+A3B = c(0.01055598, 0.00749771, 0.08527746, 0.02802223, 0.02193707, 0.04895483, 0.10791408, 0.01182055, 0.00087892, 0.00046638, 0.01701334, 0.00041706, 0.02893703, 0.05980229, 0.14006633, 0.02670834)
+
+ADAR = c(0.035655038, 0.020430637, 0.200239365, 0.018176868, 0.004278463, 0.009007546, 0.158760057, 0.00582586, 0.003506687, 0.000114872, 0.008511646, 6.53E-05, 0.046342841, 0.06486876,  0.227248867, 0.064710563)
+
+result = cor.test(A3B, ADAR)
+
+result$estimate
+result$p.value
+```
+
+
+```{r}
+install.packages("lsa")
+library(lsa)
+```
+
+
+```{r}
+# Calculate cosine similarity using the cosine function from lsa package
+cosine_similarity <- cosine(A3B, ADAR)
+
+# Print the result
+cat("Cosine Similarity:", cosine_similarity, "\n")
+
+cosine_similarity
+```
+
+
+
+
+
+
+
+
+
+
+

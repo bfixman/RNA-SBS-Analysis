@@ -1,0 +1,99 @@
+---
+title: "Variant Processing"
+author: "BF"
+date: "2024-07-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+## Load required libraries
+library(readxl)
+library(data.table)
+
+# Specify the path to the Excel file
+file_path <- '/Users/benfixman/Library/Mobile Documents/com~apple~CloudDocs/Chen_Lab/RNA_SBS/A3B RNA Editing/Data/Variants/41388_2024_3171_MOESM15_ESM.xlsx'
+
+# Read in the Excel file without headers
+data <- read_excel(file_path, col_names = FALSE)
+
+# Convert to data.table
+data <- as.data.table(data)
+
+data = data[-1,]
+
+# Assign the second row (which is now the first row) as column names
+colnames(data) <- as.character(unlist(data[1, ]))
+
+# Remove the first row, now that it's used as column names
+data <- data[-1, ]
+
+colnames(data)
+
+head(data)
+
+# Extract 'Chr' and 'Pos' from 'Location(hg38)'
+data[, chr := sub(":.*", "", `Location(hg38)`)]
+data[, pos := as.integer(sub(".*:(\\d+)-.*", "\\1", `Location(hg38)`))]
+
+# View the updated data table
+head(data)
+
+# Remove rows where 'SampleName' contains "mutant A3B"
+data <- data[!grepl("mutant A3B", SampleName), ]
+
+# Check the updated data
+data
+
+data <- data[, -c(1, 4:12)]
+head(data)
+
+# Remove rows where Chr and Pos are duplicates
+data <- data[!duplicated(data[, .(chr, pos)]), ]
+
+# Check the updated data
+data
+
+
+# Fill "A3B" in every cell in the sample_id column
+data$sample_id <- "A3B"
+
+# Create the muttype column by adding ref and alt alleles
+data$muttype <- paste(data$Ref_allele, data$Alt_allele, sep=">")
+
+data = data[,-c(1:2)]
+
+# Reorder columns by subsetting
+data <- data[, .(sample_id, chr, pos, muttype)]
+
+data
+```
+
+
+```{r}
+nrow(data)
+```
+
+```{r}
+# Remove rows where 'Chr' column is equal to "chrMT"
+data <- data[chr != "chrMT", ]
+
+# Check the updated data
+head(data)
+```
+```{r}
+nrow(data)
+```
+
+
+
+```{r}
+# Write the updated data to a CSV file
+write.csv(data, '/Users/benfixman/Library/Mobile Documents/com~apple~CloudDocs/Chen_Lab/RNA_SBS/A3B RNA Editing/Data/Variants/a3b_variants.csv', row.names = FALSE)
+```
+
