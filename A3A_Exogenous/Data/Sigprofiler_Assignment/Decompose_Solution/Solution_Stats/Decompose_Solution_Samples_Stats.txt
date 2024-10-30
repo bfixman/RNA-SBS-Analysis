@@ -1,0 +1,2 @@
+Sample Names	Total Mutations	Cosine Similarity	L1 Norm	L1_Norm_%	L2 Norm	L2_Norm_%	KL Divergence	Correlation
+A3A_exogenous	3831	0.925	2409.606	62.898%	912.675	39.631%	0.44898	0.924

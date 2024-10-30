@@ -1,0 +1,2 @@
+Samples	CH192A
+A3A_exogenous	0.00E+00

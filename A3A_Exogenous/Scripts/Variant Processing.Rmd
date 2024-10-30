@@ -1,0 +1,33 @@
+---
+title: "Variant Processing"
+author: "BF"
+date: "2024-07-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+# Load required library
+library(readxl)
+
+# Specify the path to the Excel file
+file_path <- "/Users/benfixman/Library/Mobile Documents/com~apple~CloudDocs/Chen_Lab/PRJNA261741/data/variants/Variants_filtered-columns.xlsx"
+# Read in the Excel file
+data <- read_excel(file_path)
+
+# Add "chr" before every value in the chr column
+data$chr <- paste0("chr", data$chr)
+
+# Fill "A3A_exogenous" in every cell in the sample_id column
+data$sample_id <- "A3A_exogenous"
+
+# Write the updated data to a CSV file
+write.csv(data, "/Users/benfixman/Library/Mobile Documents/com~apple~CloudDocs/Chen_Lab/PRJNA261741/data/variants/variants.csv", row.names = FALSE)
+```
+
+
